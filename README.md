@@ -6,7 +6,8 @@ This library is a simple windowing/input, graphics, sound and utility library fo
 
 The library creates a single window of fixed dimensions either in windowed or full-screen mode, optionally the default mouse cursor can be disabled. For input, Key press/release and Mouse click/release/move/scroll events are reported through the `s2d_event_poll` function, as well as the press on the window close button and the internal notice that the music has stopped playing.
 
-    void s2d_init(int width, int height, int fullscreen, int hide_cursor, char* title, int nr_parallel_sound_effect);
+    void s2d_init(int width, int height, int fullscreen, int hide_cursor, char* title,
+        int nr_parallel_sound_effect);
     void s2d_quit(void);
     int s2d_event_poll(s2d_event_t* e);  /* returns 1 while events are pending, 0 otherwise */
 
@@ -18,7 +19,8 @@ The library gives facilities to load textures and blit them on screen, by using 
     void s2d_texture_free(s2d_texture_t tex);
     void s2d_texture_dimensions(s2d_texture_t tex, int* out_width, int* out_height);
     void s2d_texture_blit_rects(s2d_texture_t tex, int* src_dst_rect_pairs, int nr);
-    void s2d_texture_blit_mesh(s2d_texture_t tex, int* grid_nrs, int dst_width, int dst_height, int tile_width, int tile_height, int src_tiles_per_row, int origin_x, int origin_y, float scale);
+    void s2d_texture_blit_mesh(s2d_texture_t tex, int* grid_nrs, int dst_width, int dst_height,
+        int tile_width, int tile_height, int src_tiles_per_row, int origin_x, int origin_y, float scale);
     void s2d_clear(void);
     void s2d_render(void);
 
@@ -78,8 +80,10 @@ There are a number of utility function in S2D, that can be used to replace libc 
 
 ### assert and exit:
 
-    #define s2d_assert(cond, msg, ...) s2d_assert_func(cond, #cond, __func__, __FILE__, __LINE__, msg __VA_OPT__(,) __VA_ARGS__)
-    void s2d_assert_func(int cond, const char* cond_str, const char* func, const char* file, int line, const char* msg_fmt, ...);
+    #define s2d_assert(cond, msg, ...) s2d_assert_func(cond, #cond, __func__, __FILE__, __LINE__, \
+        msg __VA_OPT__(,) __VA_ARGS__)
+    void s2d_assert_func(int cond, const char* cond_str, const char* func, const char* file, int line,
+        const char* msg_fmt, ...);
     void s2d_exit(int code);                                        /* in libc, not SDL */
 
 ### math library:
