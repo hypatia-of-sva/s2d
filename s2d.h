@@ -252,7 +252,7 @@ int s2d_str_cmp(const char* a, const char* b);
 char* s2d_format(const char* fmt, ...); /* caller has ownership, to be freed with s2d_mem_free */
 void s2d_parse(const char* str, char* fmt, ...);
 
-#define s2d_assert(cond, msg, ...) s2d_assert_func(cond, #cond, __func__, __FILE__, __LINE__, msg __VA_OPT__(,) __VA_ARGS__)
+#define s2d_assert(cond, ...) s2d_assert_func(cond, #cond, __func__, __FILE__, __LINE__, __VA_ARGS__)
 void s2d_assert_func(int cond, const char* cond_str, const char* func, const char* file, int line, const char* msg_fmt, ...);
 void s2d_exit(int code);                                        /* in libc, not SDL */
 
