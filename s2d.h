@@ -8,6 +8,8 @@
     #define PI    3.14159265358979323846264338327950288   /**< pi */
 #endif
 
+#define S2D_VERSION 1
+
 /* generic replacement for stdint.h, assuming 64 bit architecture */
 #ifndef HAVE_LIBC
 typedef unsigned char uint8_t;
