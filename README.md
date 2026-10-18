@@ -1,6 +1,6 @@
 # S2D - Simple 2D Games library
 
-This library is a simple windowing/input, graphics, sound and utility library for 2D games. It is currently implemented in SDL2.
+This library is a simple windowing/input, graphics, sound and utility library for 2D games. It is currently implemented in SDL2, including SDL2_mixer and SDL2_image.
 
 ## windowing and input
 
@@ -30,7 +30,7 @@ void s2d_render(void);
 
 ## sound
 
-There are two kinds of sound that can be used analogously: a) sound effects, that need to be placed on a channel. The maximum number of such sound effects is set at initialization; b) music, which only has one channel, but is otherwise very similar. It has the extra feature of having a loop option and giving an event notice when it's done playing, so another track can be lined up.
+There are two kinds of sound that can be used analogously: a) sound effects, that need to be placed on a channel. The maximum number of such sound effects is set at initialization; b) music, which only has one channel, but is otherwise very similar. It has the extra feature of having a loop option and giving an event notice when it's done playing, so another track can be lined up. (This is heavily based on SDL2_mixer.)
 
 ```c
 s2d_sound_t s2d_sound_load(char* path);
