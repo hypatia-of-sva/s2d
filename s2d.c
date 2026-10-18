@@ -677,7 +677,7 @@ void s2d_texture_blit_mesh(s2d_texture_t tex, int* grid_nrs, int dst_width, int 
     for(int y = 0; y < dst_height; y++) {
         for(int x = 0; x < dst_width; x++) {
             nrs_index = x + y*dst_width;
-            nr = grid_nrs[nr];
+            nr = grid_nrs[nrs_index];
             src_x = nr % src_tiles_per_row;
             src_y = (nr - src_x) / src_tiles_per_row;
             sdl_src.x = src_x * tile_width;
