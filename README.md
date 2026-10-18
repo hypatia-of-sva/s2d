@@ -45,67 +45,67 @@ There are a number of utility function in S2D, that can be used to replace libc 
 
 - time/date functions:
 
-    void s2d_wait_ms(uint32_t ms);
-    int64_t s2d_time_ms_since_init(void);
-    s2d_datetime_info_t* s2d_current_datetime(void);         /* in libc, not SLD */
+        void s2d_wait_ms(uint32_t ms);
+        int64_t s2d_time_ms_since_init(void);
+        s2d_datetime_info_t* s2d_current_datetime(void);         /* in libc, not SLD */
 
 - i/o functions:
 
-    void s2d_log_line(char* line_fmt, ...);
-    /* returns != 0 if file doesn't exist / already exists */
-    int s2d_file_read(char* path, void** out_data, size_t* out_len);
-    int s2d_file_write(char* path, void* data, size_t len);
-    int s2d_file_rename(char* old_path, char* new_path);    /* in libc, not SDL */
-    int s2d_file_remove(char* path);                        /* in libc, not SDL */
+        void s2d_log_line(char* line_fmt, ...);
+        /* returns != 0 if file doesn't exist / already exists */
+        int s2d_file_read(char* path, void** out_data, size_t* out_len);
+        int s2d_file_write(char* path, void* data, size_t len);
+        int s2d_file_rename(char* old_path, char* new_path);    /* in libc, not SDL */
+        int s2d_file_remove(char* path);                        /* in libc, not SDL */
 
 - allocation functions:
 
-    void* s2d_mem_alloc(size_t size, int zero);
-    void* s2d_mem_realloc(void* old_ptr, size_t new_size);
-    void s2d_mem_free(void* ptr);
-    void s2d_mem_zero(void* ptr, size_t size);
-    void s2d_mem_copy(void* dst, const void* src, size_t size);
-    int s2d_mem_cmp(const void* a, const void* b, size_t size);
+        void* s2d_mem_alloc(size_t size, int zero);
+        void* s2d_mem_realloc(void* old_ptr, size_t new_size);
+        void s2d_mem_free(void* ptr);
+        void s2d_mem_zero(void* ptr, size_t size);
+        void s2d_mem_copy(void* dst, const void* src, size_t size);
+        int s2d_mem_cmp(const void* a, const void* b, size_t size);
 
 - string functions:
 
-    char* s2d_str_new(const char* str_const);
-    char* s2d_str_concat(char* str, const char* str_const);
-    size_t s2d_str_len(const char* str);
-    int s2d_str_cmp(const char* a, const char* b);
-    char* s2d_format(const char* fmt, ...); /* caller has ownership, to be freed with s2d_mem_free */
-    void s2d_parse(const char* str, char* fmt, ...);
+        char* s2d_str_new(const char* str_const);
+        char* s2d_str_concat(char* str, const char* str_const);
+        size_t s2d_str_len(const char* str);
+        int s2d_str_cmp(const char* a, const char* b);
+        char* s2d_format(const char* fmt, ...); /* caller has ownership, to be freed with s2d_mem_free */
+        void s2d_parse(const char* str, char* fmt, ...);
 
 - assert and exit:
 
-    #define s2d_assert(cond, msg, ...) s2d_assert_func(cond, #cond, __func__, __FILE__, __LINE__, msg __VA_OPT__(,) __VA_ARGS__)
-    void s2d_assert_func(int cond, const char* cond_str, const char* func, const char* file, int line, const char* msg_fmt, ...);
-    void s2d_exit(int code);                                        /* in libc, not SDL */
+        #define s2d_assert(cond, msg, ...) s2d_assert_func(cond, #cond, __func__, __FILE__, __LINE__, msg __VA_OPT__(,) __VA_ARGS__)
+        void s2d_assert_func(int cond, const char* cond_str, const char* func, const char* file, int line, const char* msg_fmt, ...);
+        void s2d_exit(int code);                                        /* in libc, not SDL */
 
 - math library:
 
-    double s2d_acos(double x);
-    double s2d_asin(double x);
-    double s2d_atan(double x);
-    double s2d_cos(double x);
-    double s2d_sin(double x);
-    double s2d_atan2(double y, double x);
-    double s2d_tan(double x);
-    double s2d_exp(double x);
-    double s2d_log(double x);
-    double s2d_loglO(double x);
-    double s2d_pow(double x, double y);
-    double s2d_sqrt(double x);
-    double s2d_ceil(double x);
-    double s2d_fabs(double x);
-    double s2d_floor(double x);
-    double s2d_fmod(double x, double y);
-    int32_t s2d_abs(int32_t j);
-    int32_t s2d_imax(int32_t i, int32_t j);
-    int32_t s2d_imin(int32_t i, int32_t j);
-    double s2d_fmax(double x, double y);
-    double s2d_fmin(double x, double y);
-    /* better than libc, but not cryptographically safe. Seeded with true entropy at init.
-       written in libc, not SDL, based on public domain xoshiro256++ and splitmix64 algorithms
-       (See https://prng.di.unimi.it/, https://dl.acm.org/doi/10.1145/3460772) */
-    uint64_t s2d_rand(void);                        /* in own code, not SDL */
+        double s2d_acos(double x);
+        double s2d_asin(double x);
+        double s2d_atan(double x);
+        double s2d_cos(double x);
+        double s2d_sin(double x);
+        double s2d_atan2(double y, double x);
+        double s2d_tan(double x);
+        double s2d_exp(double x);
+        double s2d_log(double x);
+        double s2d_loglO(double x);
+        double s2d_pow(double x, double y);
+        double s2d_sqrt(double x);
+        double s2d_ceil(double x);
+        double s2d_fabs(double x);
+        double s2d_floor(double x);
+        double s2d_fmod(double x, double y);
+        int32_t s2d_abs(int32_t j);
+        int32_t s2d_imax(int32_t i, int32_t j);
+        int32_t s2d_imin(int32_t i, int32_t j);
+        double s2d_fmax(double x, double y);
+        double s2d_fmin(double x, double y);
+        /* better than libc, but not cryptographically safe. Seeded with true entropy at init.
+           written in libc, not SDL, based on public domain xoshiro256++ and splitmix64 algorithms
+           (See https://prng.di.unimi.it/, https://dl.acm.org/doi/10.1145/3460772) */
+        uint64_t s2d_rand(void);                        /* in own code, not SDL */
