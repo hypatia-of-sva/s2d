@@ -38,7 +38,7 @@ typedef enum s2d_event_type_t {
     S2D_EVENT_TYPE_MOUSE_MOVE       = 6,
     S2D_EVENT_TYPE_MOUSE_SCROLL     = 7,
     S2D_EVENT_TYPE_MUSIC_FINISHED   = 8,
-    S2D_EVENT_TYPE_UNKNOWN          = 9,
+    S2D_EVENT_TYPE_UNKNOWN          = 0xFF,
     S2D_EVENT_TYPE_MAX_ENUM         = 0xFF
 } s2d_event_type_t;
 typedef struct s2d_event_t {
