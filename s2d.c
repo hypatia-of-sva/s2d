@@ -668,22 +668,24 @@ void s2d_texture_blit_rects(s2d_texture_t tex, int* src_dst_rects, int nr) {
         SDL_RenderCopy(_s2d_data.renderer, (SDL_Texture*) tex, &sdl_src, &sdl_dst);
     }
 }
-void s2d_texture_blit_mesh(s2d_texture_t tex, int* grid_nrs, int dst_width, int dst_height, int tile_width, int tile_height, int src_tiles_per_row, int origin_x, int origin_y, float scale) {
+void s2d_texture_blit_mesh(s2d_texture_t tex, int* grid_nrs, int src_tile_width, int src_tile_height, int src_tiles_per_row, int dst_origin_x, int dst_origin_y, int dst_width, int dst_height, int dst_tile_width, int dst_tile_height) {
     s2d_assert(_s2d_data.is_init, "S2D Library function called before initialization!");
     int nrs_index, nr, src_x, src_y;
     SDL_Rect sdl_src, sdl_dst;
-    sdl_src.w = sdl_dst.w = tile_width;
-    sdl_src.h = sdl_dst.h = tile_height;
+    sdl_src.w = src_tile_width;
+    sdl_src.h = src_tile_height;
+    sdl_dst.w = dst_tile_width;
+    sdl_dst.h = dst_tile_height;
     for(int y = 0; y < dst_height; y++) {
         for(int x = 0; x < dst_width; x++) {
             nrs_index = x + y*dst_width;
             nr = grid_nrs[nrs_index];
             src_x = nr % src_tiles_per_row;
             src_y = (nr - src_x) / src_tiles_per_row;
-            sdl_src.x = src_x * tile_width;
-            sdl_src.y = src_y * tile_height;
-            sdl_dst.x = (int) ((scale*((float)sdl_src.x)) + origin_x);
-            sdl_dst.y = (int) ((scale*((float)sdl_src.y)) + origin_y);
+            sdl_src.x = src_x * src_tile_width;
+            sdl_src.y = src_y * src_tile_height;
+            sdl_dst.x = dst_origin_x + (x * dst_tile_width);
+            sdl_dst.y = dst_origin_y + (y * dst_tile_height);
             SDL_RenderCopy(_s2d_data.renderer, (SDL_Texture*) tex, &sdl_src, &sdl_dst);
         }
     }

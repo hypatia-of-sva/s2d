@@ -62,8 +62,9 @@ s2d_texture_t s2d_texture_load(char* path);
 void s2d_texture_free(s2d_texture_t tex);
 void s2d_texture_dimensions(s2d_texture_t tex, int* out_width, int* out_height);
 void s2d_texture_blit_rects(s2d_texture_t tex, int* src_dst_rect_pairs, int nr);
-void s2d_texture_blit_mesh(s2d_texture_t tex, int* grid_nrs, int dst_width, int dst_height,
-    int tile_width, int tile_height, int src_tiles_per_row, int origin_x, int origin_y, float scale);
+void s2d_texture_blit_mesh(s2d_texture_t tex, int* grid_nrs, int src_tile_width,
+    int src_tile_height, int src_tiles_per_row, int dst_origin_x, int dst_origin_y,
+    int dst_width, int dst_height, int dst_tile_width, int dst_tile_height)
 void s2d_clear(void);
 void s2d_render(void);
 ```
