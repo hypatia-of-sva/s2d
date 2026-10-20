@@ -17,7 +17,7 @@ typedef signed char int8_t;
 typedef unsigned short uint16_t;
 typedef short int16_t;
 typedef unsigned int uint32_t;
-typedef int int32_t;
+typedef int int32_t, bool;
 typedef unsigned long long uint64_t, size_t, uintptr_t;
 typedef long long int64_t, ptrdiff_t;
 #endif
@@ -160,6 +160,7 @@ typedef enum s2d_mouse_button_t {
     S2D_MOUSE_BUTTON_MIDDLE     = 2,
     S2D_MOUSE_BUTTON_X1         = 3,
     S2D_MOUSE_BUTTON_X2         = 4,
+    S2D_MOUSE_BUTTON_LAST       = S2D_MOUSE_BUTTON_X2,
     S2D_MOUSE_BUTTON_UNKNOWN    = 255,
     S2D_MOUSE_BUTTON_MAX_ENUM   = 0xFF
 } s2d_mouse_button_t;
@@ -198,7 +199,7 @@ typedef void* s2d_music_t;
 typedef void* s2d_texture_t;
 
 
-void s2d_init(int width, int height, int fullscreen, int hide_cursor, char* title, int nr_parallel_sound_effect);
+void s2d_init(int width, int height, bool fullscreen, bool hide_cursor, char* title, int nr_parallel_sound_effect);
 void s2d_quit(void);
 
 /* returns 1 while events are pending, 0 otherwise */
@@ -213,7 +214,7 @@ void s2d_sound_channel_volume(int channel, float volume_percentage);
 
 s2d_music_t s2d_music_load(char* path);
 void s2d_music_free(s2d_music_t music);
-void s2d_music_play(s2d_music_t music, int loop);
+void s2d_music_play(s2d_music_t music, bool loop);
 void s2d_music_stop(void);
 void s2d_music_volume(float volume_percentage);
 
@@ -238,7 +239,7 @@ int s2d_file_remove(char* path);                        /* in libc, not SDL */
 
 void s2d_log_line(char* line_fmt, ...);
 
-void* s2d_mem_alloc(size_t size, int zero);
+void* s2d_mem_alloc(size_t size, bool zero);
 void* s2d_mem_realloc(void* old_ptr, size_t new_size);
 void s2d_mem_free(void* ptr);
 void s2d_mem_zero(void* ptr, size_t size);
@@ -253,7 +254,7 @@ char* s2d_format(const char* fmt, ...); /* caller has ownership, to be freed wit
 void s2d_parse(const char* str, char* fmt, ...);
 
 #define s2d_assert(cond, ...) s2d_assert_func(cond, #cond, __func__, __FILE__, __LINE__, __VA_ARGS__)
-void s2d_assert_func(int cond, const char* cond_str, const char* func, const char* file, int line, const char* msg_fmt, ...);
+void s2d_assert_func(bool cond, const char* cond_str, const char* func, const char* file, int line, const char* msg_fmt, ...);
 void s2d_exit(int code);                                        /* in libc, not SDL */
 
 double s2d_acos(double x);

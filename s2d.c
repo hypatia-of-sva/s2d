@@ -6,6 +6,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #ifndef HAVE_LIBC
 #define HAVE_LIBC
@@ -189,7 +190,7 @@ void s2d_parse(const char* str, char* fmt, ...) {
     va_end(ap);
 }
 
-void s2d_assert_func(int cond, const char* cond_str, const char* func, const char* file, int line, const char* msg_fmt, ...) {
+void s2d_assert_func(bool cond, const char* cond_str, const char* func, const char* file, int line, const char* msg_fmt, ...) {
     if(!cond) {
         /* we do an allocation here, and not as a parameter to this functions msg,
            so that we only allocate the msg string if the condition is actually false */
@@ -219,7 +220,7 @@ void s2d_assert_func(int cond, const char* cond_str, const char* func, const cha
 static void _s2d_music_finished_callback(void) {
     _s2d_data.music_finished = 1;
 }
-void s2d_init(int width, int height, int fullscreen, int hide_cursor, char* title, int nr_parallel_sound_effects) {
+void s2d_init(int width, int height, bool fullscreen, bool hide_cursor, char* title, int nr_parallel_sound_effects) {
     int rendererFlags, windowFlags, code, imgFlags;
     
     s2d_assert(!_s2d_data.is_init, "S2D Library was tried to be initialized twice!");
@@ -515,7 +516,7 @@ s2d_music_t s2d_music_load(char* path) {
     s2d_assert(path != NULL, "S2D Sound loaded without file name!");
     return Mix_LoadMUS(path);
 }
-void s2d_music_play(s2d_music_t music, int loop) {
+void s2d_music_play(s2d_music_t music, bool loop) {
     s2d_assert(_s2d_data.is_init, "S2D Library function called before initialization!");
     s2d_assert(music != NULL, "invalid S2D Music played!");
     Mix_PlayMusic((Mix_Music*) music, (loop) ? -1 : 0);
@@ -607,7 +608,7 @@ int s2d_str_cmp(const char* a, const char* b) {
     return SDL_strcmp(a,b);
 }
 
-void* s2d_mem_alloc(size_t size, int zero) {
+void* s2d_mem_alloc(size_t size, bool zero) {
     s2d_assert(_s2d_data.is_init, "S2D Library function called before initialization!");
     void* ptr;
     if(zero) ptr = SDL_calloc(size, 1);

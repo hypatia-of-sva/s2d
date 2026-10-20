@@ -2,7 +2,7 @@
 
 
 int main(void) {
-    s2d_event_t e; int keep_going = 1;
+    s2d_event_t e; bool keep_going = 1;
 
     s2d_init(800, 600, FALSE, FALSE, "S2D test", 0);
     
