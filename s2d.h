@@ -1,8 +1,8 @@
-#ifndef TRUE
-    #define TRUE 1
+#ifndef true
+    #define true 1
 #endif
-#ifndef FALSE
-    #define FALSE 0
+#ifndef false
+    #define false 0
 #endif
 #ifndef PI
     #define PI    3.14159265358979323846264338327950288   /**< pi */

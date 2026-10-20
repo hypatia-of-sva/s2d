@@ -7,7 +7,7 @@ This library is a simple windowing/input, graphics, sound and utility library fo
 The library creates a single window of fixed dimensions either in windowed or full-screen mode, optionally the default mouse cursor can be disabled. For input, Key press/release and Mouse click/release/move/scroll events are reported through the `s2d_event_poll` function, as well as the press on the window close button and the internal notice that the music has stopped playing.
 
 ```c
-void s2d_init(int width, int height, int fullscreen, int hide_cursor, char* title,
+void s2d_init(int width, int height, bool fullscreen, bool hide_cursor, char* title,
     int nr_parallel_sound_effect);
 void s2d_quit(void);
 
@@ -25,6 +25,7 @@ typedef enum s2d_mouse_button_t {
     S2D_MOUSE_BUTTON_MIDDLE     = 2,
     S2D_MOUSE_BUTTON_X1         = 3,
     S2D_MOUSE_BUTTON_X2         = 4,
+    S2D_MOUSE_BUTTON_LAST       = S2D_MOUSE_BUTTON_X2,
     S2D_MOUSE_BUTTON_UNKNOWN    = 255,
     S2D_MOUSE_BUTTON_MAX_ENUM   = 0xFF
 } s2d_mouse_button_t;
@@ -85,7 +86,7 @@ void s2d_sound_channel_volume(int channel, float volume_percentage);
 typedef void* s2d_music_t;
 s2d_music_t s2d_music_load(char* path);
 void s2d_music_free(s2d_music_t music);
-void s2d_music_play(s2d_music_t music, int loop);
+void s2d_music_play(s2d_music_t music, bool loop);
 void s2d_music_stop(void);
 void s2d_music_volume(float volume_percentage);
 ```
@@ -104,7 +105,7 @@ typedef signed char int8_t;
 typedef unsigned short uint16_t;
 typedef short int16_t;
 typedef unsigned int uint32_t;
-typedef int int32_t;
+typedef int int32_t, bool;
 typedef unsigned long long uint64_t, size_t, uintptr_t;
 typedef long long int64_t, ptrdiff_t;
 ```
@@ -138,7 +139,7 @@ int s2d_file_remove(char* path);                        /* in libc, not SDL */
 ### allocation functions:
 
 ```c
-void* s2d_mem_alloc(size_t size, int zero);
+void* s2d_mem_alloc(size_t size, bool zero);
 void* s2d_mem_realloc(void* old_ptr, size_t new_size);
 void s2d_mem_free(void* ptr);
 void s2d_mem_zero(void* ptr, size_t size);
@@ -162,7 +163,7 @@ void s2d_parse(const char* str, char* fmt, ...);
 ```c
 #define s2d_assert(cond, msg, ...) s2d_assert_func(cond, #cond, __func__, __FILE__, __LINE__, \
     msg __VA_OPT__(,) __VA_ARGS__)
-void s2d_assert_func(int cond, const char* cond_str, const char* func, const char* file, int line,
+void s2d_assert_func(bool cond, const char* cond_str, const char* func, const char* file, int line,
     const char* msg_fmt, ...);
 void s2d_exit(int code);                                        /* in libc, not SDL */
 ```

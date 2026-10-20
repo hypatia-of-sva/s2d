@@ -4,7 +4,7 @@
 int main(void) {
     s2d_event_t e; bool keep_going = 1;
 
-    s2d_init(800, 600, FALSE, FALSE, "S2D test", 0);
+    s2d_init(800, 600, false, false, "S2D test", 0);
     
     while(keep_going) {
         while(s2d_event_poll(&e)) {
