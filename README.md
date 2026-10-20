@@ -98,8 +98,8 @@ There are a number of utility function in S2D, that can be used to replace libc 
 ### basic types and macros
 
 ```c
-#define TRUE 1
-#define FALSE 0
+#define true 1
+#define false 0
 typedef unsigned char uint8_t;
 typedef signed char int8_t;
 typedef unsigned short uint16_t;
